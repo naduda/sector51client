@@ -1,0 +1,26 @@
+{
+  "extends": "../tslint.json",
+  "rules": {
+    "no-output-on-prefix": false,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "trace"
+    ],
+    "directive-selector": [
+      true,
+      "attribute",
+      "sector",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "sector",
+      "kebab-case"
+    ],
+    "no-bitwise": false,
+    "no-unused-expression": false
+  }
+}

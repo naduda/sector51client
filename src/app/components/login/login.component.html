@@ -1,0 +1,29 @@
+<div id="login" class="border rounded">
+  <header class="flex-center justify-content-center position-relative">
+    <sector-languages></sector-languages>
+    <h5 [innerHTML]="'authentication' | translate | uppercase" class="m-0 bold"></h5>
+  </header>
+  <hr>
+  <div class="form-inline">
+    <label class="my-0 mr-2" for="login-phone" [innerHTML]="'phone' | translate | titlecase"></label>
+    <input type="text" class="form-control" id="login-phone" [(ngModel)]="name" autocomplete="off">
+  </div>
+  <br>
+  <div class="form-inline">
+    <label class="my-0 mr-2" for="login-password" [innerHTML]="'password' | translate | titlecase"></label>
+    <input type="password" class="form-control" id="login-password" [(ngModel)]="password">
+  </div>
+  <hr>
+  <footer class="between-center">
+    <small pTooltip="Not implement yet" tooltipPosition="bottom">
+      <a href="javascript:void(0)" [innerHTML]="'forgot' | titlecase"></a>
+    </small>
+
+    <button pTooltip="Not implement yet" class="btn btn-primary" (click)="login()">
+      <i class="sr-spinner pulse" [class.hidden]="!waiting"></i>
+
+      <span [innerHTML]="'login' | translate | uppercase"></span>
+    </button>
+  </footer>
+  <small class="errors text-danger" [innerHTML]="errorMessage"></small>
+</div>

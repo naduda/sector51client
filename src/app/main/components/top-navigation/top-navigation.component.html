@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" href="javascript:void(0)"></a>
+
+  <div class="h-100 flex-center">
+    <button class="navbar-toggler" type="button" (click)="expanded = !expanded">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <div class="collapse navbar-collapse bg-light" [class.show]="expanded">
+    <p-menubar [model]="items" styleClass="sector-menubar border-0">
+      <div>
+        <sector-languages></sector-languages>
+      </div>
+    </p-menubar>
+  </div>
+</nav>

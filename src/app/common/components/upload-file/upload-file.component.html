@@ -1,0 +1,4 @@
+<label class="m-0 pointer" (click)="openFileDialog($event)">
+  <ng-content></ng-content>
+  <input #inputFile type="file" class="d-none" [accept]="accept" [multiple]="multiple">
+</label>

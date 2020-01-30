@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#login {
+  padding: 1rem 1rem .5rem;
+  width: 25rem;
+  position: relative;
+
+  .errors {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-inline {
+    label {
+      min-width: 30%;
+      font-weight: bold;
+      justify-content: flex-start;
+    }
+
+    input {
+      flex: 1;
+    }
+  }
+
+  header {
+    sector-languages {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  footer {
+    .btn {
+      width: 10rem;
+      position: relative;
+
+      i {
+        position: absolute;
+        left: .75rem;
+        top: .6rem;
+      }
+    }
+  }
+}

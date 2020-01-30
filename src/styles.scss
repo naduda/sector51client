@@ -1,0 +1,52 @@
+@import url(//fonts.googleapis.com/css?family=Lato:300,400,600,700&subset=latin,latin-ext);
+@import 'scss/primeng';
+@import 'scss/spinner';
+
+$font: 'Titillium Web', sans-serif !important;
+
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+    font-family: $font;
+  }
+}
+
+.ui-widge {
+  font-family: $font !important;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.between-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+// Validation
+input {
+  &.ng-valid[required], .ng-valid.required {
+    border-left: .25rem solid #42A948;
+  }
+
+  &.ng-touched.ng-invalid:not(form),
+  &.ng-dirty.ng-invalid:not(form) {
+    border-left: .25rem solid #a94442;
+  }
+}
+// ===============
+
+.flex-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
