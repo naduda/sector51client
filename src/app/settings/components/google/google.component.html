@@ -1,0 +1,36 @@
+<sector-upload-file url="/private/upload"
+                    accept=".json"
+                    name="uploadFile"
+                    fileName="credentials.json"
+                    (onSelect)="uploadCredentials($event)">
+  <i class="btn">Upload</i>
+</sector-upload-file>
+
+<br>
+
+<form *ngIf="credentials?.authURL"
+      autocomplete="off"
+      novalidate
+      class="auth-code"
+      [formGroup]="googleAuthForm"
+      (ngSubmit)="googleAuth()">
+
+  <p>Go to the following <a [href]="credentials?.authURL" target="_blank">link</a>
+    in your browser then type the authorization code
+  </p>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Auth Code</mat-label>
+    <input formControlName="code"
+           type="password"
+           matInput>
+  </mat-form-field>
+
+  <button type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="googleAuthForm.invalid">
+    Auth
+  </button>
+
+</form>

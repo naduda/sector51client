@@ -1,0 +1,8 @@
+<label class="m-0 pointer">
+  <ng-content></ng-content>
+  <input class="d-none"
+         type="file"
+         [accept]="accept"
+         [multiple]="multiple"
+         (change)="onFilesAdded($event)">
+</label>

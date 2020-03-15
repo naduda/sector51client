@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sector-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.sass']
 })
-export class AppComponent implements OnInit {
-  loaded: boolean;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.loaded = true;
-  }
+export class AppComponent {
+  title = 'sector51client';
 }

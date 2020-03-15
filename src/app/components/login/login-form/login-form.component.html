@@ -1,0 +1,30 @@
+<form class="border"
+      autocomplete="off"
+      novalidate
+      [formGroup]="form"
+      (ngSubmit)="login()">
+
+  <h3 class="center border-bottom text-primary" color="text-primary">Login</h3>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Phone</mat-label>
+    <input formControlName="phone"
+           matInput
+           placeholder="Phone number"
+           mask="00) 000-00-00"
+           prefix="+38 (0">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input formControlName="password"
+           type="password"
+           matInput
+           placeholder="Password">
+  </mat-form-field>
+
+  <div class="buttons text-right">
+    <small class="errors text-danger" [innerHTML]="error"></small>
+    <button type="submit" mat-raised-button color="primary">Login</button>
+  </div>
+</form>
