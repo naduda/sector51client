@@ -1,0 +1,28 @@
+.sidenav-container
+  height: 100%
+
+.sidenav 
+  width: 20rem
+  .mat-toolbar
+    background: inherit
+  &.d-none
+    display: none
+
+.mat-toolbar.mat-primary
+  height: 5rem
+  position: sticky
+  padding: 0 1rem
+  top: 0
+  z-index: 1
+  &.handset
+    padding: 0 1rem 0 0
+  img
+    height: 3rem
+    margin-right: 1rem
+    border-radius: 50%
+  .spacer
+    flex: 1 1 auto
+
+mat-sidenav-content
+  .ml-0
+    margin-left: 0

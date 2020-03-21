@@ -1,0 +1,27 @@
+<mat-list>
+  <mat-form-field class="bottom-shadow" mat-subheader>
+    <mat-icon matPrefix>search</mat-icon>
+    <mat-label>Search</mat-label>
+    <input type="text"
+           matInput
+           placeholder="Search"
+           autocomplete="off"
+           (input)="filterClients($event.target.value)">
+  </mat-form-field>
+
+  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
+    <div *cdkVirtualFor="let user of users;">
+      <mat-list-item *ngIf="!user.hidden">
+        <h6 class="dot-ends"
+            mat-line
+            [matTooltip]="user.surname + ' ' + user.name | titlecase"
+            [innerHTML]="user.surname + ' ' + user.name | titlecase">
+        </h6>
+      </mat-list-item>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <div class="flex-center status-bar top-shadow">
+    <span [innerHTML]="statusInfo"></span>
+  </div>
+</mat-list>

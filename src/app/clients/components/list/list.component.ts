@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'sector-clients-list',
@@ -9,11 +8,11 @@ import { ClientService } from '../../services/client.service';
 export class ListComponent implements OnInit {
 
   constructor(
-    private clientService: ClientService,
+
   ) { }
 
   ngOnInit(): void {
-    this.clientService.whoami.subscribe(e => console.log(e));
+
   }
 
 }

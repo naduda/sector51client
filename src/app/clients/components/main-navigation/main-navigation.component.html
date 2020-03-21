@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidenav-container" *ngIf="isHandset$ | async as isHandset">
+  <mat-sidenav #drawer
+               class="sidenav"
+               [class.d-none]="!isHandset.matches"
+               [fixedInViewport]="false"
+               [attr.role]="isHandset.matches ? 'dialog' : 'navigation'"
+               [mode]="isHandset.matches ? 'over' : 'side'"
+               [opened]="!isHandset.matches">
+    <ng-container *ngIf="isHandset.matches">
+      <mat-toolbar>Menu</mat-toolbar>
+      <sector-top-navigation></sector-top-navigation>
+    </ng-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" [class.handset]="isHandset.matches">
+      <button type="button"
+              aria-label="Toggle sidenav"
+              mat-icon-button
+              (click)="drawer.toggle()"
+              *ngIf="isHandset.matches">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <img src="assets/img/logo.jpg" alt="logo">
+      <span>Sector51</span>
+      <sector-top-navigation class="horizontal" *ngIf="!isHandset.matches"></sector-top-navigation>
+      <span class="flex-1" *ngIf="isHandset.matches"></span>
+      <div class="spacer"></div>
+      <div>
+        <a class="text-white"
+           href="#"
+           *ngIf="operator$ | async as operator"
+           [innerHTML]="operator.name"
+           [matMenuTriggerFor]="logoutMenu">
+        </a>
+        <mat-menu #logoutMenu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+
+    <ng-content selector=".clients-content"></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
