@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs/operators';
 import { IUser } from '../../model/interfaces';
+import { ESettings } from '../../model/settings.enum';
 import { ClientService } from '../../services/client.service';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'sector-tree-navigation',
@@ -19,6 +21,7 @@ export class TreeNavigationComponent implements OnInit, OnDestroy {
 
   constructor(
     private clientService: ClientService,
+    private settingsService: SettingsService,
   ) { }
 
   ngOnInit(): void {
@@ -43,5 +46,9 @@ export class TreeNavigationComponent implements OnInit, OnDestroy {
 
   filterClients(v: string) {
     this.filterSubject.next(v);
+  }
+
+  userSettings(user: IUser) {
+    this.settingsService.open(ESettings.USER_SETTINGS, user);
   }
 }

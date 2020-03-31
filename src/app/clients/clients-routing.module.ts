@@ -7,9 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'list' },
   {
     path: '', component: MainComponent, children: [
-      {
-        path: 'list', component: ListComponent
-      }
+      { path: 'list', component: ListComponent },
     ]
   }
 ];

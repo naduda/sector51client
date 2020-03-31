@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginFormComponent } from './components/login/login-form/login-form.component';
+import { LoginComponent } from './components/login/login.component';
 import { ErrorInterceptor } from './security/error.interceptor';
 import { JwtInterceptor } from './security/jwt.interceptor';
 import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './components/login/login.component';
-import { LoginFormComponent } from './components/login/login-form/login-form.component';
 
 @NgModule({
   declarations: [

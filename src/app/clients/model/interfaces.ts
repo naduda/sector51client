@@ -4,3 +4,9 @@ export interface IUser {
   name: string;
   surname: string;
 }
+
+export interface IService {
+  id: string;
+  name: string;
+  price: number;
+}

@@ -1,0 +1,11 @@
+<sector-settings-dialog>
+  <div dialogContent>
+    <pre>
+      {{ data | json }}
+    </pre>
+  </div>
+
+  <ng-container dialogFooter>
+    <button mat-raised-button color="primary" (click)="close()">Apply</button>
+  </ng-container>
+</sector-settings-dialog>

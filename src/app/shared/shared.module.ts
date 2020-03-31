@@ -1,4 +1,5 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -11,12 +12,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMaskModule } from 'ngx-mask';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 const materialModules = [
+  CdkTableModule,
   MatButtonModule,
   MatDialogModule,
   MatFormFieldModule,
@@ -25,6 +29,7 @@ const materialModules = [
   MatListModule,
   MatMenuModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatTooltipModule,
   ScrollingModule,
 ];
@@ -41,6 +46,7 @@ const sharedModules = [
 const sharedComponents = [
   UploadFileComponent,
   ConfirmDialogComponent,
+  SettingsDialogComponent,
 ];
 
 @NgModule({

@@ -10,6 +10,8 @@ import { ClientsRoutingModule } from './clients-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 import { TopNavigationComponent } from './components/main-navigation/top-navigation/top-navigation.component';
+import { ServicesSettingsComponent } from './components/settings/services-settings/services-settings.component';
+import { UserSettingsComponent } from './components/settings/user-settings/user-settings.component';
 import { TreeNavigationComponent } from './components/tree-navigation/tree-navigation.component';
 import { MainComponent } from './main.component';
 
@@ -19,7 +21,9 @@ import { MainComponent } from './main.component';
     ListComponent,
     TopNavigationComponent,
     TreeNavigationComponent,
-    MainNavigationComponent
+    MainNavigationComponent,
+    ServicesSettingsComponent,
+    UserSettingsComponent,
   ],
   imports: [
     SharedModule,

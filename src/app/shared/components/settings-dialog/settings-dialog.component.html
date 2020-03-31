@@ -1,0 +1,12 @@
+<div mat-dialog-title class="flex-center bottom-shadow shadow-white">
+  <h3 [innerHTML]="data?.title"></h3>
+  <mat-icon matPrefix class="pointer" (click)="close()">close</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <ng-content select="[dialogContent]"></ng-content>
+</div>
+
+<div mat-dialog-actions class="flex-center top-shadow shadow-white">
+  <ng-content select="[dialogFooter]"></ng-content>
+</div>

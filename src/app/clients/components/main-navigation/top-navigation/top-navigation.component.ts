@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ESettings } from 'src/app/clients/model/settings.enum';
+import { SettingsService } from 'src/app/clients/services/settings.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { IUser } from '../../../model/interfaces';
 import { ClientService } from '../../../services/client.service';
@@ -15,6 +17,7 @@ export class TopNavigationComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private authService: AuthService,
+    private settingsService: SettingsService,
   ) { }
 
   ngOnInit(): void {
@@ -23,5 +26,10 @@ export class TopNavigationComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  openServices(e) {
+    e.preventDefault();
+    this.settingsService.open(ESettings.SERVICES);
   }
 }
