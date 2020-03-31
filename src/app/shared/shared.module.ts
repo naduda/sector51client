@@ -18,6 +18,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
+import { SmartTooltipDirective } from './directives/smart-tooltip.directive';
 
 const materialModules = [
   CdkTableModule,
@@ -49,9 +50,14 @@ const sharedComponents = [
   SettingsDialogComponent,
 ];
 
+const sharedDirectives = [
+  SmartTooltipDirective,
+];
+
 @NgModule({
   declarations: [
     sharedComponents,
+    sharedDirectives,
   ],
   imports: [
     sharedModules,
@@ -59,6 +65,7 @@ const sharedComponents = [
   exports: [
     sharedModules,
     sharedComponents,
+    sharedDirectives,
   ]
 })
 export class SharedModule { }
