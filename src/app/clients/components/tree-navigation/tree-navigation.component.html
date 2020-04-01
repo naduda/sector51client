@@ -9,7 +9,7 @@
            (input)="filterClients($event.target.value)">
   </mat-form-field>
 
-  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
+  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport" *ngIf="!loading; else loaderTmpl">
     <div *cdkVirtualFor="let user of users;">
       <mat-list-item *ngIf="!user.hidden">
         <div class="flex-center tree-item">
@@ -23,6 +23,10 @@
       </mat-list-item>
     </div>
   </cdk-virtual-scroll-viewport>
+
+  <ng-template #loaderTmpl>
+    Loading...
+  </ng-template>
 
   <div class="flex-center status-bar top-shadow">
     <span [innerHTML]="statusInfo"></span>

@@ -18,13 +18,13 @@ export class MainNavigationComponent {
 
   constructor(
     breakpointObserver: BreakpointObserver,
-    clientsService: ClientService,
+    clientService: ClientService,
     private authService: AuthService,
   ) {
     this.isHandset$ = breakpointObserver.observe(Breakpoints.HandsetPortrait)
       .pipe(shareReplay());
 
-    this.operator$ = clientsService.whoami;
+    this.operator$ = clientService.whoami$;
   }
 
   logout() {

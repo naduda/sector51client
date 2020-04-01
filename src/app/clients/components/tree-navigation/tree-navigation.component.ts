@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { ADestroyHelper } from 'src/app/shared/helpers/abstract-destroy';
 import { IUser } from '../../model/interfaces';
 import { ESettings } from '../../model/settings.enum';
 import { ClientService } from '../../services/client.service';
@@ -11,18 +12,20 @@ import { SettingsService } from '../../services/settings.service';
   templateUrl: './tree-navigation.component.html',
   styleUrls: ['./tree-navigation.component.sass']
 })
-export class TreeNavigationComponent implements OnInit, OnDestroy {
+export class TreeNavigationComponent extends ADestroyHelper implements OnInit, OnDestroy {
 
   users: Partial<IUser>[];
   statusInfo: string;
+  loading: boolean;
 
   private filterSubject = new BehaviorSubject<string>(null);
-  private destroy$ = new Subject<void>();
 
   constructor(
     private clientService: ClientService,
     private settingsService: SettingsService,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.filterSubject.asObservable()
@@ -31,17 +34,13 @@ export class TreeNavigationComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         debounceTime(500),
         map(e => e ? e.toLowerCase().trim() : ''),
-        switchMap(e => this.clientService.getFilteredClients(e))
+        tap(_ => this.loading = true),
+        switchMap(e => this.clientService.getFilteredClients(e).pipe(finalize(() => this.loading = false))),
       )
       .subscribe(e => {
         this.users = e;
         this.statusInfo = `${e.length} clients`;
       });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   filterClients(v: string) {

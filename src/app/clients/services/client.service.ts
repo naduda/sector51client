@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 import { IUser } from '../model/interfaces';
 
 @Injectable({
@@ -13,11 +13,11 @@ export class ClientService {
 
   constructor(private http: HttpClient) { }
 
-  get whoami(): Observable<IUser> {
+  get whoami$(): Observable<IUser> {
     return this.http.get<IUser>('/private/whoami');
   }
 
-  get cliensList(): Observable<IUser[]> {
+  get cliensList$(): Observable<IUser[]> {
     if (!this.clients$) {
       this.clients$ = this.http.get<IUser[]>('/private/clients-list')
         .pipe(
@@ -28,28 +28,10 @@ export class ClientService {
   }
 
   getFilteredClients(v: string): Observable<IUser[]> {
-    if (!v) {
-      return this.cliensList;
+    if (v) {
+      const params = new HttpParams().set('f', v);
+      return this.http.get<IUser[]>('/private/clients-list', { params });
     }
-    return this.cliensList
-      .pipe(
-        map(e => e.filter(a => this.filterClients(a, v)))
-      );
-  }
-
-  private filterClients(u: IUser, v: string): boolean {
-    if (!v) {
-      return true;
-    }
-
-    if (u.surname.toLowerCase().includes(v)) {
-      return true;
-    }
-
-    if (u.name.toLowerCase().includes(v)) {
-      return true;
-    }
-
-    return u.phone.toLowerCase().includes(v);
+    return this.cliensList$;
   }
 }
