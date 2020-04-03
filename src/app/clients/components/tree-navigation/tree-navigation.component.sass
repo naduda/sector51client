@@ -6,12 +6,15 @@ mat-form-field
 
 mat-list
   padding: 0
-  height: 100%
+  height: calc(100% - 2rem)
   *[mat-subheader]
-    margin: 0
+    margin: 0 0 1rem
     height: $headerHeight
+  .top-shadow
+    margin-top: 1rem
   mat-list-item
     position: relative
+    height: 4rem
     .tree-item
       position: absolute
       justify-content: space-between
@@ -25,8 +28,9 @@ mat-list
           overflow: hidden
           white-space: nowrap
       mat-icon
-        font-size: 2rem
+        font-size: 1.8rem
         opacity: .5
+        justify-content: center
         &:hover
           opacity: 1
           font-size: 2.5rem
