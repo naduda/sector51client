@@ -1,11 +1,66 @@
 <sector-settings-dialog>
   <div dialogContent>
-    <pre>
-      {{ data | json }}
-    </pre>
+    <form autocomplete="off"
+          novalidate
+          [formGroup]="form"
+          (ngSubmit)="submit()">
+
+      <mat-form-field class="inverse-field">
+        <mat-label>Surname</mat-label>
+        <input formControlName="surname"
+               matInput
+               type="text"
+               maxlength="25"
+               placeholder="Surname">
+      </mat-form-field>
+
+      <mat-form-field class="inverse-field">
+        <mat-label>Name</mat-label>
+        <input formControlName="name"
+               matInput
+               type="text"
+               maxlength="25"
+               placeholder="Name">
+      </mat-form-field>
+
+      <mat-form-field class="inverse-field">
+        <mat-label>Phone</mat-label>
+        <input formControlName="phone"
+               matInput
+               placeholder="Phone number"
+               mask="00) 000-00-00"
+               prefix="+38 (0">
+      </mat-form-field>
+
+      <mat-form-field class="inverse-field">
+        <mat-label>Card</mat-label>
+        <input formControlName="card"
+               type="text"
+               matInput
+               placeholder="Card"
+               mask="00000000000009">
+      </mat-form-field>
+
+      <div class="gender inverse-field">
+        <h6>Gender</h6>
+        <mat-radio-group formControlName="isMan">
+          <mat-radio-button [value]="true">Man</mat-radio-button>
+          <mat-radio-button [value]="false">Woman</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <button #submitBtn class="d-none" type="submit"></button>
+    </form>
+
   </div>
 
   <ng-container dialogFooter>
-    <button mat-raised-button color="primary" (click)="close()">Apply</button>
+    <button class="apply"
+            mat-raised-button
+            color="primary"
+            [disabled]="form.invalid"
+            (click)="submitBtn.click()">
+      <span class="apply__text">Apply</span>
+    </button>
   </ng-container>
 </sector-settings-dialog>

@@ -34,4 +34,8 @@ export class ClientService {
     }
     return this.cliensList$;
   }
+
+  updateUser(u: IUser): Observable<void> {
+    return this.http.put<void>('/private/user', u);
+  }
 }

@@ -1,8 +1,8 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { MatSnackBar, MatSnackBarDismiss, MatSnackBarRef } from '@angular/material/snack-bar';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { ServicesSettingsComponent } from '../components/settings/services-settings/services-settings.component';
 import { UserSettingsComponent } from '../components/settings/user-settings/user-settings.component';
 import { ESettings } from '../model/settings.enum';
@@ -20,7 +20,7 @@ export class SettingsService {
     private dialog: MatSnackBar,
   ) { }
 
-  open(type: ESettings, data?: any): void {
+  open(type: ESettings, data?: any): Observable<MatSnackBarDismiss> {
     if (this.currentOpenedTypeSubject.value === type) {
       this.currentPayloadSubject.next(data);
       return;
@@ -43,9 +43,14 @@ export class SettingsService {
         this.currentOpenedTypeSubject.next(type);
       });
 
-    this.dialogRef.afterDismissed()
-      .pipe(take(1))
-      .subscribe(_ => this.currentOpenedTypeSubject.next(ESettings.EMPTY));
+    return this.dialogRef.afterDismissed()
+      .pipe(
+        take(1),
+        tap(_ => {
+          this.currentOpenedTypeSubject.next(ESettings.EMPTY);
+          this.currentPayloadSubject.next(null);
+        })
+      );
   }
 
   private getComponentTypeByEnum(type: ESettings): ComponentType<unknown> {

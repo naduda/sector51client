@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ADestroyHelper } from 'src/app/shared/helpers/abstract-destroy';
@@ -17,12 +17,14 @@ export class TreeNavigationComponent extends ADestroyHelper implements OnInit, O
   users: Partial<IUser>[];
   statusInfo: string;
   loading: boolean;
+  settingsUserId: string;
 
   private filterSubject = new BehaviorSubject<string>(null);
 
   constructor(
     private clientService: ClientService,
     private settingsService: SettingsService,
+    private cdr: ChangeDetectorRef,
   ) {
     super();
   }
@@ -47,7 +49,14 @@ export class TreeNavigationComponent extends ADestroyHelper implements OnInit, O
     this.filterSubject.next(v);
   }
 
-  userSettings(user: IUser) {
-    this.settingsService.open(ESettings.USER_SETTINGS, user);
+  openUserSettings(user: IUser) {
+    this.settingsUserId = user.id;
+    const ref = this.settingsService.open(ESettings.USER_SETTINGS, user);
+    if (ref) {
+      ref.subscribe(_ => {
+        this.settingsUserId = null;
+        this.cdr.detectChanges();
+      });
+    }
   }
 }

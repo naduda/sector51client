@@ -17,6 +17,7 @@ mat-list
     height: 4rem
     .tree-item
       position: absolute
+      flex-direction: row-reverse
       justify-content: space-between
       width: calc(100% - 2rem)
       h6
@@ -36,6 +37,13 @@ mat-list
           font-size: 2.5rem
           transform: translateX(-.25rem)
           transition: all .2s ease-in-out
+          & + h6
+            font-weight: bold
+      &.bold
+        h6
+          font-weight: bold
+        mat-icon
+          opacity: 1
 
 .scroll-viewport
   height: calc(100% - #{$headerHeight} - #{$headerHeight})

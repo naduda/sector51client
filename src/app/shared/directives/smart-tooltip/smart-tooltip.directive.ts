@@ -4,11 +4,11 @@ import { AfterViewInit, ComponentRef, Directive, ElementRef, HostListener, Input
 import { SmartTooltipComponent } from './smart-tooltip.component';
 
 @Directive({
-  selector: '[sectorSmartTooltip]'
+  selector: '[smartTooltip]'
 })
 export class SmartTooltipDirective implements OnInit, AfterViewInit {
 
-  @Input('sectorSmartTooltip') text = '';
+  @Input('smartTooltip') text = '';
   @Input() disableOnTextFit = true;
 
   private overlayRef: OverlayRef;
@@ -50,6 +50,9 @@ export class SmartTooltipDirective implements OnInit, AfterViewInit {
 
   @HostListener('mouseout')
   hide() {
+    if (this.textFit) {
+      return;
+    }
     this.overlayRef.detach();
   }
 }

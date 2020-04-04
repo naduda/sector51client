@@ -13,6 +13,7 @@
       true,
       "attribute",
       "sector",
+      "smart",
       "camelCase"
     ],
     "component-selector": [

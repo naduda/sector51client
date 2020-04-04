@@ -11,9 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxMaskModule } from 'ngx-mask';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
@@ -30,9 +30,9 @@ const materialModules = [
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatRadioModule,
   MatSidenavModule,
   MatSnackBarModule,
-  MatTooltipModule,
   ScrollingModule,
 ];
 

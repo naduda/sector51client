@@ -12,13 +12,13 @@
   <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport" *ngIf="!loading; else loaderTmpl">
     <div *cdkVirtualFor="let user of users;">
       <mat-list-item *ngIf="!user.hidden">
-        <div class="flex-center tree-item">
+        <div class="flex-center tree-item" [class.bold]="settingsUserId === user.id">
+          <mat-icon matPrefix class="flex-center pointer" (click)="openUserSettings(user)">settings</mat-icon>
           <h6 class="dot-ends"
               mat-line
-              [sectorSmartTooltip]="user.surname + ' ' + user.name | titlecase"
+              [smartTooltip]="user.surname + ' ' + user.name | titlecase"
               [innerHTML]="user.surname + ' ' + user.name | titlecase">
           </h6>
-          <mat-icon matPrefix class="flex-center pointer" (click)="userSettings(user)">settings</mat-icon>
         </div>
       </mat-list-item>
     </div>

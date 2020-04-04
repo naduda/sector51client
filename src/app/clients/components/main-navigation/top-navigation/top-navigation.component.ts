@@ -15,6 +15,6 @@ export class TopNavigationComponent {
 
   openServices(e) {
     e.preventDefault();
-    this.settingsService.open(ESettings.SERVICES);
+    this.settingsService.open(ESettings.SERVICES).subscribe();
   }
 }
