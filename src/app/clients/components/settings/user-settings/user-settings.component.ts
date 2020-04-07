@@ -37,7 +37,7 @@ export class UserSettingsComponent extends ADestroyHelper implements OnInit {
       surname: [null, nameValidators],
       name: [null, nameValidators],
       phone: [null, [Validators.required]],
-      card: [null, [Validators.required, Validators.pattern(/\d/g), Validators.minLength(13), Validators.maxLength(15)]],
+      card: [null, [Validators.required, Validators.pattern(/\d/), Validators.minLength(13), Validators.maxLength(15)]],
       isMan: [null, [Validators.required]],
     });
   }
@@ -50,8 +50,11 @@ export class UserSettingsComponent extends ADestroyHelper implements OnInit {
         filter(e => !!e)
       )
       .subscribe(e => {
-        this.user = e;
-        this.form.patchValue(e);
+        this.user = {
+          ...e,
+          phone: this.trimPhone(e.phone)
+        };
+        this.form.patchValue(this.user);
       });
   }
 
@@ -69,7 +72,7 @@ export class UserSettingsComponent extends ADestroyHelper implements OnInit {
       ...this.user,
       surname: v.surname,
       name: v.name,
-      phone: v.phone,
+      phone: `+380${v.phone}`,
       card: v.card,
       isMan: v.isMan
     };
@@ -78,5 +81,13 @@ export class UserSettingsComponent extends ADestroyHelper implements OnInit {
     this.clientService.updateUser(user)
       .pipe(finalize(() => this.waiting = false))
       .subscribe(_ => this.close());
+  }
+
+  private trimPhone(v: string): string {
+    if (!v) {
+      return '';
+    }
+    v = v.replace(/[()-\s\+]/g, '');
+    return v.substring(v.length - 9);
   }
 }
