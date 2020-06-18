@@ -1,8 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, isDevMode, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '@core/services/auth.service';
 import { Subject } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'sector-login-form',
@@ -20,9 +20,12 @@ export class LoginFormComponent implements OnDestroy {
     fb: FormBuilder,
     private authService: AuthService,
   ) {
+    const phone = isDevMode() ? '973947538' : '';
+    const psw = isDevMode() ? 'owner' : '';
+
     this.form = fb.group({
-      phone: ['', Validators.required],
-      password: ['', Validators.required],
+      phone: [phone, Validators.required],
+      password: [psw, Validators.required],
     });
 
     this.form.valueChanges

@@ -1,0 +1,66 @@
+<div class="create-user-service-form" *ngIf="!loading; else loaderTmpl">
+  <header>
+    <span [innerHTML]="name"></span>
+    <mat-icon class="close" [mat-dialog-close]="false">close</mat-icon>
+  </header>
+
+  <form autocomplete="off"
+        novalidate
+        [formGroup]="form">
+
+    <mat-form-field class="datepicker">
+      <mat-label>Start Date</mat-label>
+      <span matPrefix>Since:</span>
+      <input matInput
+             formControlName="dtBeg"
+             [matDatepicker]="begPicker"
+             (click)="begPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="begPicker"></mat-datepicker-toggle>
+      <mat-datepicker #begPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="datepicker">
+      <mat-label>End Date</mat-label>
+      <span matPrefix>Till:</span>
+      <input matInput
+             formControlName="dtEnd"
+             [matDatepicker]="endPicker"
+             (click)="endPicker.open()">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="datepicker">
+      <mat-label>Price</mat-label>
+      <span matPrefix>Price:</span>
+      <input matInput formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isBox" class="box number">
+      <mat-label>Choose a box</mat-label>
+      <span matPrefix>Box:</span>
+      <mat-select formControlName="value" class="ml-2">
+        <mat-option>Choose a box</mat-option>
+        <mat-option *ngFor="let box of boxes" [value]="box.number">
+          {{ box.number }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <footer>
+    <button mat-raised-button
+            color="primary"
+            [mat-dialog-close]="form.value"
+            [disabled]="form.invalid"
+            cdkFocusInitial>
+      Add Service
+    </button>
+  </footer>
+</div>
+
+<ng-template #loaderTmpl>
+  <div class="create-user-service-form">
+    loading...
+  </div>
+</ng-template>

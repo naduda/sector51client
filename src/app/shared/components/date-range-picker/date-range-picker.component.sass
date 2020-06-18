@@ -1,0 +1,47 @@
+.wrapper
+  position: relative
+  height: 2rem
+  width: 42rem
+
+  .input-wrapper
+    height: 2rem
+    .label
+      width: 100%
+      border-bottom: 1px solid #aaaaaa
+
+  .calendar-container
+    display: block
+    position: absolute
+    left: 0
+    top: 2rem
+    border: 1px solid #aaaaaa
+    border-radius: 0 0 .5rem .5rem
+    padding: 1rem
+    background-color: #ffffff
+    z-index: 1
+
+  div.text-right
+    padding-top: 1rem
+    button
+      min-width: 12rem
+
+
+\:host(.inverse)
+  .calendar-container
+    background-color: lighten(#323232, 5%)
+    border: 1px solid #666666
+  .label
+    border-bottom: 1px solid #ffffffb6
+    &.mat-input-element:disabled
+      color: #ffffff6a
+
+  &::ng-deep
+    .mat-calendar-arrow
+      border-top-color: #ffffffb3
+    .mat-calendar-body-label,
+    .mat-calendar-body-cell-content
+      color: darken(#ffffffb3, 10%)
+    .mat-calendar-table-header
+      color: darken(#ffffffb3, 20%)
+    .calendar
+      border: 1px solid #6d6d6d

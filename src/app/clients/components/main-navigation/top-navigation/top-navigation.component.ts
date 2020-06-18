@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ESettings } from 'src/app/clients/model/settings.enum';
-import { SettingsService } from 'src/app/clients/services/settings.service';
+import { ESettings } from '@clients/model/settings.enum';
+import { NavigationService } from '@clients/services/navigation.service';
+import { SettingsService } from '@clients/services/settings.service';
+import { ENavigationState } from '@clients/state/state.enum';
 
 @Component({
   selector: 'sector-top-navigation',
@@ -11,10 +13,21 @@ export class TopNavigationComponent {
 
   constructor(
     private settingsService: SettingsService,
+    private navigationService: NavigationService,
   ) { }
 
   openServices(e) {
     e.preventDefault();
     this.settingsService.open(ESettings.SERVICES).subscribe();
+  }
+
+  openUserServices(e) {
+    e.preventDefault();
+    this.navigationService.routeState = ENavigationState.SERVICES;
+  }
+
+  openClients(e) {
+    e.preventDefault();
+    this.navigationService.routeState = ENavigationState.LIST;
   }
 }

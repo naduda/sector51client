@@ -6,7 +6,14 @@ export interface IUser {
 }
 
 export interface IService {
-  id: string;
+  id: number;
   name: string;
   price: number;
+}
+
+export interface IBox {
+  card: string;
+  idType: number;
+  number: number;
+  time: string;
 }

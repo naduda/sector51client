@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { ADestroyHelper } from 'src/app/shared/helpers/abstract-destroy';
 import { IUser } from '../../model/interfaces';
 import { ESettings } from '../../model/settings.enum';
 import { ClientService } from '../../services/client.service';
+import { NavigationService } from '../../services/navigation.service';
 import { SettingsService } from '../../services/settings.service';
 
 @Component({
@@ -18,15 +19,23 @@ export class TreeNavigationComponent extends ADestroyHelper implements OnInit, O
   statusInfo: string;
   loading: boolean;
   settingsUserId: string;
+  activeSettingsType = ESettings.USER_SETTINGS;
+  selectedClientId: string;
 
   private filterSubject = new BehaviorSubject<string>(null);
+  private currentUser: IUser;
 
   constructor(
     private clientService: ClientService,
     private settingsService: SettingsService,
+    private navigationService: NavigationService,
     private cdr: ChangeDetectorRef,
   ) {
     super();
+
+    navigationService.state$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(e => this.selectedClientId = e.clientId);
   }
 
   ngOnInit(): void {
@@ -45,17 +54,23 @@ export class TreeNavigationComponent extends ADestroyHelper implements OnInit, O
       });
   }
 
+  selectClient(id: string) {
+    this.navigationService.clientId = this.selectedClientId === id ? null : id;
+  }
+
   filterClients(v: string) {
     this.filterSubject.next(v);
   }
 
-  openUserSettings(user: IUser) {
+  openSettings(user: IUser) {
+    this.currentUser = user;
     this.settingsUserId = user.id;
-    const ref = this.settingsService.open(ESettings.USER_SETTINGS, user);
+    const ref = this.settingsService.open(this.activeSettingsType, user);
     if (ref) {
-      ref.subscribe(_ => {
+      ref.subscribe(dismissedByAction => {
         this.settingsUserId = null;
         this.cdr.detectChanges();
+        this.activeSettingsType = ESettings.USER_SETTINGS;
       });
     }
   }

@@ -1,0 +1,11 @@
+<div class="user-services" *ngIf="clientId">
+  <sector-create-service-wizard [clientId]="clientId"
+                                [userServices]="userServices"
+                                [services]="services"
+                                (onCreate)="reload()">
+  </sector-create-service-wizard>
+
+  <sector-user-service-list [userServices]="userServices"
+                            (onDelete)="reload()">
+  </sector-user-service-list>
+</div>

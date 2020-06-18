@@ -13,11 +13,13 @@
     <div *cdkVirtualFor="let user of users;">
       <mat-list-item *ngIf="!user.hidden">
         <div class="flex-center tree-item" [class.bold]="settingsUserId === user.id">
-          <mat-icon matPrefix class="flex-center pointer" (click)="openUserSettings(user)">settings</mat-icon>
-          <h6 class="dot-ends"
-              mat-line
+          <mat-icon matPrefix class="flex-center pointer" (click)="openSettings(user)">settings</mat-icon>
+          <h6 mat-line
+              class="dot-ends pointer"
+              [class.selected]="selectedClientId === user.id"
               [smartTooltip]="user.surname + ' ' + user.name | titlecase"
-              [innerHTML]="user.surname + ' ' + user.name | titlecase">
+              [innerHTML]="user.surname + ' ' + user.name | titlecase"
+              (click)="selectClient(user.id)">
           </h6>
         </div>
       </mat-list-item>

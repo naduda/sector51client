@@ -1,0 +1,45 @@
+<div class="create-service-wizard" *ngIf="filteredServices?.length">
+  <form autocomplete="off"
+        novalidate
+        [formGroup]="form"
+        (ngSubmit)="submit()">
+
+    <mat-form-field *ngIf="filteredServices">
+      <mat-label>Services</mat-label>
+      <mat-select formControlName="service">
+        <mat-option *ngFor="let s of filteredServices" [value]="s.id">
+          {{ s.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <ng-container *ngIf="serviceControl.value === 0">
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="abonType">
+          <mat-option>Choose Type</mat-option>
+          <mat-option *ngFor="let s of abonementTypes" [value]="s.value">
+            {{ s.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="abonTypeControl.value">
+        <mat-label>Period</mat-label>
+        <mat-select formControlName="abonPeriod">
+          <mat-option>Choose Period</mat-option>
+          <mat-option *ngFor="let s of abonementPeriods" [value]="s.value">
+            {{ s.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!result">
+      <mat-icon class="bold">add</mat-icon>
+    </button>
+  </form>
+</div>

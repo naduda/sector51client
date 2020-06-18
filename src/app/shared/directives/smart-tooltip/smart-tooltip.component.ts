@@ -1,17 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sector-smart-tooltip',
   templateUrl: './smart-tooltip.component.html',
   styleUrls: ['./smart-tooltip.component.sass']
 })
-export class SmartTooltipComponent implements OnInit {
+export class SmartTooltipComponent {
 
   @Input() text: string;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

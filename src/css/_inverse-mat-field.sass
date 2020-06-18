@@ -1,12 +1,26 @@
+$whiteColor: #ffffff8a
+$underlineColor: #ffffffb6
+$disabledColor: #ffffff6a
+
 .inverse-field:not(.mat-form-field-invalid)
   ::placeholder
-    color: #ffffff8a
+    color: $whiteColor
     opacity: 1
   .mat-form-field-underline
-    background-color: #ffffffb6
+    background-color: $underlineColor
   .mat-form-field-label
-    color: #ffffff8a
+    color: $whiteColor
+  .mat-input-element:disabled
+    color: $disabledColor
+  
+  &.mat-form-field-disabled.mat-form-field-appearance-legacy
+    .mat-form-field-underline
+      background-color: $underlineColor
 
 
   .mat-radio-outer-circle
-    border-color: #ffffff8a
+    border-color: $whiteColor
+
+  .mat-select-value-text,
+  .mat-select-arrow
+    color: $whiteColor

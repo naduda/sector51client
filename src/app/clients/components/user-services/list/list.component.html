@@ -1,0 +1,90 @@
+<form autocomplete="off"
+      novalidate
+      [formGroup]="form">
+
+  <mat-table formArrayName="rows" [dataSource]="userServices">
+
+    <ng-container matColumnDef="idx">
+      <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;">
+        {{idx + 1}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dtBeg">
+      <mat-header-cell *matHeaderCellDef> From </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <mat-form-field class="datepicker" floatLabel="never">
+          <mat-label>Start Date</mat-label>
+          <input matInput
+                 formControlName="dtBeg"
+                 [matDatepicker]="begPicker"
+                 (click)="begPicker.open()">
+          <mat-datepicker-toggle matSuffix [for]="begPicker"></mat-datepicker-toggle>
+          <mat-datepicker #begPicker></mat-datepicker>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dtEnd">
+      <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <mat-form-field class="datepicker" floatLabel="never">
+          <mat-label>End Date</mat-label>
+          <input matInput
+                 formControlName="dtEnd"
+                 [matDatepicker]="endPicker"
+                 (click)="endPicker.open()">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+      <mat-header-cell *matHeaderCellDef> Desc </mat-header-cell>
+      <mat-cell *matCellDef="let element; let idx = index;" [formGroupName]="idx">
+        <ng-container *ngIf="element.value">
+          <ng-container *ngIf="element.idService === 2">
+            <mat-select formControlName="value">
+              <mat-option>Choose a box</mat-option>
+              <ng-container *ngFor="let box of boxes">
+                <mat-option *ngIf="!box.card || box.number === +element.value" [value]="box.number">
+                  {{ box.number }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </ng-container>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="save">
+      <mat-header-cell *matHeaderCellDef> Save </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <mat-icon color="primary"
+                  [class.disabled]="rowsControl.controls[idx].invalid"
+                  (click)="saveService(idx)">save</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <mat-icon color="warn"
+                  [class.disabled]="rowsControl.controls[idx].invalid"
+                  (click)="deleteService(idx)">delete</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</form>

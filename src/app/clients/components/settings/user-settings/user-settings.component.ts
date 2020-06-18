@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { IUser } from '@clients/model/interfaces';
+import { ClientService } from '@clients/services/client.service';
+import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
 import { Observable } from 'rxjs';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
-import { IUser } from 'src/app/clients/model/interfaces';
-import { ClientService } from 'src/app/clients/services/client.service';
-import { ADestroyHelper } from 'src/app/shared/helpers/abstract-destroy';
 
 @Component({
   selector: 'sector-user-settings',

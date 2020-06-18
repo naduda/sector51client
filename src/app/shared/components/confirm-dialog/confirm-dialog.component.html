@@ -1,8 +1,11 @@
 <div class="confirm-dialog">
-  <header [innerHTML]="data.title"></header>
-  <h6 [innerHTML]="data.message"></h6>
+  <header>
+    <h2 [innerHTML]="data.title"></h2>
+  </header>
 
-  <footer>
+  <h4 class="desc" [innerHTML]="data.message"></h4>
+
+  <footer class="flex-center">
     <button mat-raised-button color="primary" [innerHTML]="data.acceptLabel || 'Yes'" (click)="onClick(true)"></button>
     <button mat-raised-button [innerHTML]="data.rejectLabel || 'No'" (click)="onClick(false)"></button>
   </footer>

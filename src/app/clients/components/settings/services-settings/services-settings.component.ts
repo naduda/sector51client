@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import { IService } from '@clients/model/interfaces';
+import { ClientService } from '@clients/services/client.service';
 import { take } from 'rxjs/operators';
-import { IService } from 'src/app/clients/model/interfaces';
-import { ServicesService } from 'src/app/clients/services/services.service';
 
 @Component({
   selector: 'sector-services-settings',
@@ -17,11 +17,11 @@ export class ServicesSettingsComponent implements OnInit {
   constructor(
     private dialogRef: MatSnackBarRef<ServicesSettingsComponent>,
     @Inject(MAT_SNACK_BAR_DATA) public dialogData: any,
-    private servicesService: ServicesService,
+    private clientService: ClientService,
   ) { }
 
   ngOnInit(): void {
-    this.servicesService.services$
+    this.clientService.services$
       .pipe(take(1))
       .subscribe(e => this.data = e);
   }
