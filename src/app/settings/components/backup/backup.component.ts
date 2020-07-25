@@ -14,7 +14,6 @@ export class BackupComponent implements OnInit {
   }
 
   onUpload(files: FileList) {
-    console.log(files)
     this.http.post<void>('/private/restore-file', { name: files[0].name }).subscribe();
   }
 }

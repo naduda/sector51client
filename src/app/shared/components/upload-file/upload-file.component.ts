@@ -22,7 +22,7 @@ export class UploadFileComponent extends AValueAccessor {
   @Input() accept: string;
   @Input() multiple = false;
 
-  @Output() onSelect = new EventEmitter<FileList>();
+  @Output() onUpload = new EventEmitter<FileList>();
 
   constructor(private http: HttpClient) {
     super();
@@ -31,8 +31,8 @@ export class UploadFileComponent extends AValueAccessor {
   onUpdate(files: FileList): void {
     this.onChange(files);
     this.onTouched();
-    // this.onSelect.emit(files);
-    this.uploadFile(files[0]).subscribe(_ => this.onSelect.emit(files));
+
+    this.uploadFile(files[0]).subscribe(_ => this.onUpload.emit(files));
   }
 
   writeValue(value: any): void { }
@@ -43,7 +43,7 @@ export class UploadFileComponent extends AValueAccessor {
     target.value = null;
   }
 
-  private uploadFile(file): Observable<void> {
+  private uploadFile(file: File): Observable<void> {
     const formData: FormData = new FormData();
     formData.append(this.name, file, this.fileName);
     return this.http.post<void>(this.url, formData);
