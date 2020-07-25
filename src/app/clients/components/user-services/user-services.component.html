@@ -1,4 +1,6 @@
 <div class="user-services" *ngIf="clientId; else servicesSettings">
+  <sector-custom-spinner *ngIf="loading"></sector-custom-spinner>
+
   <sector-create-service-wizard [clientId]="clientId"
                                 [userServices]="userServices"
                                 [services]="services"

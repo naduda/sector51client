@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ADestroyDirective } from '@shared/helpers/abstract-destroy';
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { map, switchMap, take, takeUntil } from 'rxjs/operators';
+import { finalize, map, switchMap, take, takeUntil } from 'rxjs/operators';
 import { IService } from '../../model/interfaces';
 import { IUserService } from '../../model/user.service';
 import { ClientService } from '../../services/client.service';
@@ -17,6 +17,7 @@ export class ClientServicesComponent extends ADestroyDirective {
   clientId: string;
   userServices: IUserService[];
   services: IService[];
+  loading: boolean;
 
   private reloadSubject = new BehaviorSubject<void>(null);
 
@@ -29,7 +30,7 @@ export class ClientServicesComponent extends ADestroyDirective {
     this.reloadSubject
       .pipe(
         takeUntil(this.destroy$),
-        switchMap(_ => navigationService.state$),
+        switchMap(_ => navigationService.state$.pipe(takeUntil(this.destroy$))),
         map(e => e.clientId),
       )
       .subscribe(e => this.loadUserServices(e));
@@ -41,10 +42,12 @@ export class ClientServicesComponent extends ADestroyDirective {
 
   private loadUserServices(clientId: string) {
     this.clientId = clientId;
+    this.loading = true;
 
     combineLatest([this.clientService.services$, this.clientService.getUserServices(this.clientId)])
       .pipe(
-        take(1)
+        finalize(() => this.loading = false),
+        take(1),
       )
       .subscribe(([services, userServices]) => {
         this.services = services;

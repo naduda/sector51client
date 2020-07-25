@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -20,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { NgxMaskModule } from 'ngx-mask';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { MyNativeDateAdapter } from './date.adapter';
@@ -44,6 +46,7 @@ const materialModules = [
   MatSnackBarModule,
   MatTableModule,
   ScrollingModule,
+  MatProgressSpinnerModule,
 ];
 
 const sharedModules = [
@@ -59,6 +62,7 @@ const sharedComponents = [
   UploadFileComponent,
   ConfirmDialogComponent,
   SettingsDialogComponent,
+  CustomSpinnerComponent,
 ];
 
 const sharedDirectives = [

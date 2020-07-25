@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ClientService } from '@clients/services/client.service';
 import { ConfirmService } from '@shared/services/confirm.service';
 import { forkJoin } from 'rxjs';
@@ -18,7 +18,7 @@ interface IClient {
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   clients: IClient[];
   displayedColumns: string[] = ['idx', 'time', 'surname', 'name', 'box', 'delete'];
@@ -26,10 +26,12 @@ export class ListComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private confirmService: ConfirmService,
-  ) { }
+  ) {
+    this.init(false);
+  }
 
-  ngOnInit(): void {
-    forkJoin([this.clientService.cliensList$, this.clientService.boxList$(false)])
+  private init(roload: boolean): void {
+    forkJoin([this.clientService.cliensList$, this.clientService.boxList$(roload)])
       .pipe(
         map(([clients, boxes]) => {
           boxes = boxes.filter(e => e.card && e.idType !== 3);
@@ -69,6 +71,6 @@ export class ListComponent implements OnInit {
           time: null,
         }))
       )
-      .subscribe(_ => this.clients = this.clients.filter(e => e.id !== c.id));
+      .subscribe(_ => this.init(true));
   }
 }
