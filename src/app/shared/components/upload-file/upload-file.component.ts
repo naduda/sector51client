@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { AValueAccessor } from '../../helpers/abstract.value-accessor';
 
 @Component({
@@ -15,8 +16,8 @@ import { AValueAccessor } from '../../helpers/abstract.value-accessor';
 })
 export class UploadFileComponent extends AValueAccessor {
 
-  @Input() url: string;
-  @Input() name: string;
+  @Input() url = '/private/upload';
+  @Input() name = 'uploadFile';
   @Input() fileName: string;
   @Input() accept: string;
   @Input() multiple = false;
@@ -30,7 +31,8 @@ export class UploadFileComponent extends AValueAccessor {
   onUpdate(files: FileList): void {
     this.onChange(files);
     this.onTouched();
-    this.onSelect.emit(files);
+    // this.onSelect.emit(files);
+    this.uploadFile(files[0]).subscribe(_ => this.onSelect.emit(files));
   }
 
   writeValue(value: any): void { }
@@ -39,5 +41,11 @@ export class UploadFileComponent extends AValueAccessor {
     const files = { ...target.files };
     this.onUpdate(files);
     target.value = null;
+  }
+
+  private uploadFile(file): Observable<void> {
+    const formData: FormData = new FormData();
+    formData.append(this.name, file, this.fileName);
+    return this.http.post<void>(this.url, formData);
   }
 }

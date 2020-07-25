@@ -20,7 +20,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

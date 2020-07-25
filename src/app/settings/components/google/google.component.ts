@@ -31,8 +31,8 @@ export class GoogleComponent implements OnInit {
   }
 
   uploadCredentials(files: FileList) {
-    this.googleService.uploadFile(files[0], 'uploadFile', 'credentials.json')
-      .subscribe(_ => this.initCredentials());
+    // this.googleService.uploadFile(files[0], 'uploadFile', 'credentials.json')
+    //   .subscribe(_ => this.initCredentials());
   }
 
   googleAuth() {

@@ -1,7 +1,8 @@
+import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +20,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxMaskModule } from 'ngx-mask';
+import { JwtInterceptor } from '../security/jwt.interceptor';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
@@ -28,6 +31,7 @@ import { MyNativeDateAdapter } from './date.adapter';
 import { MY_NATIVE_DATE_FORMATS } from './date.format';
 import { SmartTooltipComponent } from './directives/smart-tooltip/smart-tooltip.component';
 import { SmartTooltipDirective } from './directives/smart-tooltip/smart-tooltip.directive';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const materialModules = [
   CdkTableModule,
@@ -40,13 +44,14 @@ const materialModules = [
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
   MatTableModule,
+  MatToolbarModule,
   ScrollingModule,
-  MatProgressSpinnerModule,
 ];
 
 const sharedModules = [
@@ -63,6 +68,7 @@ const sharedComponents = [
   ConfirmDialogComponent,
   SettingsDialogComponent,
   CustomSpinnerComponent,
+  NavigationComponent,
 ];
 
 const sharedDirectives = [
@@ -77,6 +83,7 @@ const sharedDirectives = [
   ],
   imports: [
     sharedModules,
+    LayoutModule,
   ],
   exports: [
     sharedModules,
@@ -84,6 +91,7 @@ const sharedDirectives = [
     sharedDirectives,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: DateAdapter, useClass: MyNativeDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: MY_NATIVE_DATE_FORMATS }
   ]

@@ -1,5 +1,12 @@
-<sector-main-nav>
-  <mat-drawer-container class="clients-content">
+<sector-navigation>
+
+  <div class="nav-items">
+    <a mat-list-item href="#" (click)="openClients($event)">Clients</a>
+    <a mat-list-item href="#" (click)="openUserServices($event)">User Services</a>
+    <a mat-list-item href="#" routerLink="/settings">Settings</a>
+  </div>
+
+  <mat-drawer-container class="content">
     <mat-drawer mode="side" opened>
       <sector-tree-navigation></sector-tree-navigation>
     </mat-drawer>
@@ -8,4 +15,5 @@
       <router-outlet></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>
-</sector-main-nav>
+
+</sector-navigation>

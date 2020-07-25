@@ -1,2 +1,13 @@
-<h1>Settings</h1>
-<router-outlet></router-outlet>
+<sector-navigation>
+
+  <div class="nav-items">
+    <a mat-list-item routerLink="google">Google</a>
+    <a mat-list-item routerLink="backup">Backup</a>
+    <a mat-list-item routerLink="/clients">Clients</a>
+  </div>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+</sector-navigation>

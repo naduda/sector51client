@@ -1,17 +1,17 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
+import { IUser } from '@clients/model/interfaces';
+import { ClientService } from '@clients/services/client.service';
 import { AuthService } from '@core/services/auth.service';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-import { IUser } from '../../model/interfaces';
-import { ClientService } from '../../services/client.service';
 
 @Component({
-  selector: 'sector-main-nav',
-  templateUrl: './main-navigation.component.html',
-  styleUrls: ['./main-navigation.component.sass']
+  selector: 'sector-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.sass']
 })
-export class MainNavigationComponent {
+export class NavigationComponent {
 
   isHandset$: Observable<BreakpointState>;
   operator$: Observable<IUser>;
@@ -30,4 +30,5 @@ export class MainNavigationComponent {
   logout() {
     this.authService.logout();
   }
+
 }

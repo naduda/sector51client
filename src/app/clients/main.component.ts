@@ -31,6 +31,16 @@ export class MainComponent extends ADestroyDirective implements OnInit {
     this.setStateByLocation();
   }
 
+  openUserServices(e) {
+    e.preventDefault();
+    this.navigationService.routeState = ENavigationState.SERVICES;
+  }
+
+  openClients(e) {
+    e.preventDefault();
+    this.navigationService.routeState = ENavigationState.LIST;
+  }
+
   private changeRoute(v: NavigationState) {
     const commands = ['clients', v.state];
     if (v.clientId && v.state !== ENavigationState.LIST) {
