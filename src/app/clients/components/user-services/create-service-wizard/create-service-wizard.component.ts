@@ -5,7 +5,6 @@ import { IService } from '@clients/model/interfaces';
 import { IUserService } from '@clients/model/user.service';
 import { ClientService } from '@clients/services/client.service';
 import { dateAdd, EDateValueType } from '@core/utils/date.utils';
-import { IPeriod } from '@shared/components/date-range-picker/period.interface';
 import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
 import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
 import {
@@ -16,6 +15,11 @@ import {
   IAbonementType
 } from '../abonement.constants';
 import { CreateServiceFormComponent } from '../create-service-form/create-service-form.component';
+
+interface IPeriod {
+  beg: Date;
+  end: Date;
+}
 
 @Component({
   selector: 'sector-create-service-wizard',

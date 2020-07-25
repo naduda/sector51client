@@ -3,6 +3,7 @@ export interface IUser {
   phone: string;
   name: string;
   surname: string;
+  card: string;
 }
 
 export interface IService {
@@ -16,5 +17,5 @@ export interface IBox {
   card: string;
   idType: number;
   number: number;
-  time: string;
+  time: Date;
 }

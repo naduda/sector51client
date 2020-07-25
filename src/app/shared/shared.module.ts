@@ -20,8 +20,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { NgxMaskModule } from 'ngx-mask';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { DateRangeDialogComponent } from './components/date-range-picker/date-range-dialog/date-range-dialog.component';
-import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { SettingsDialogComponent } from './components/settings-dialog/settings-dialog.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { MyNativeDateAdapter } from './date.adapter';
@@ -61,7 +59,6 @@ const sharedComponents = [
   UploadFileComponent,
   ConfirmDialogComponent,
   SettingsDialogComponent,
-  DateRangePickerComponent,
 ];
 
 const sharedDirectives = [
@@ -73,7 +70,6 @@ const sharedDirectives = [
     sharedComponents,
     sharedDirectives,
     SmartTooltipComponent,
-    DateRangeDialogComponent,
   ],
   imports: [
     sharedModules,

@@ -11,7 +11,7 @@ export class ConfirmDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<ConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IConfirmDialog
+    @Inject(MAT_DIALOG_DATA) public data: IConfirmDialog,
   ) { }
 
   onClick(result: boolean) {

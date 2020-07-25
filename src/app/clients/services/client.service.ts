@@ -98,9 +98,16 @@ export class ClientService {
   boxList$(reload = false): Observable<IBox[]> {
     if (!this.boxes$ || reload) {
       this.boxes$ = this.http.get<IBox[]>('/private/boxes')
-        .pipe(shareReplay(1));
+        .pipe(
+          tap(e => e.map(z => z.time = new Date(z.time.toString()))),
+          shareReplay(1)
+        );
     }
     return this.boxes$;
+  }
+
+  updateBox(box: IBox): Observable<void> {
+    return this.http.put<void>('/private/box', box);
   }
 
 }

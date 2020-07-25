@@ -1,10 +1,42 @@
-<p>list works!</p>
+<h2 class="text-center">Clients</h2>
 
-<div style="margin: 5rem;">
-  <div>
-    <sector-date-range-picker></sector-date-range-picker>
-  </div>
-  <div>
-    next row
-  </div>
-</div>
+<mat-table [dataSource]="clients">
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  <ng-container matColumnDef="idx">
+    <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+    <mat-cell *matCellDef="let idx = index;">
+      {{idx + 1}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.time | date:'HH:mm'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="surname">
+    <mat-header-cell *matHeaderCellDef> Surname </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="box">
+    <mat-header-cell *matHeaderCellDef> Box </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.box}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let element;">
+      <mat-icon color="warn"
+                (click)="deleteClient(element)">delete</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+</mat-table>

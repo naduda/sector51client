@@ -3,6 +3,8 @@
       [formGroup]="form">
 
   <mat-table formArrayName="rows" [dataSource]="userServices">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
     <ng-container matColumnDef="idx">
       <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
@@ -81,10 +83,6 @@
                   (click)="deleteService(idx)">delete</mat-icon>
       </mat-cell>
     </ng-container>
-
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
 </form>
