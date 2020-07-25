@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { IUser } from '@clients/model/interfaces';
 import { ClientService } from '@clients/services/client.service';
-import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
+import { ADestroyDirective } from '@shared/helpers/abstract-destroy';
 import { Observable } from 'rxjs';
 import { filter, finalize, takeUntil } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { filter, finalize, takeUntil } from 'rxjs/operators';
   templateUrl: './user-settings.component.html',
   styleUrls: ['./user-settings.component.sass']
 })
-export class UserSettingsComponent extends ADestroyHelper implements OnInit {
+export class UserSettingsComponent extends ADestroyDirective implements OnInit {
 
   form: FormGroup;
   waiting: boolean;

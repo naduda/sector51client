@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Component } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
 import { Observable } from 'rxjs/internal/Observable';
-import { shareReplay } from 'rxjs/internal/operators/shareReplay';
+import { shareReplay } from 'rxjs/operators';
 import { IUser } from '../../model/interfaces';
 import { ClientService } from '../../services/client.service';
 

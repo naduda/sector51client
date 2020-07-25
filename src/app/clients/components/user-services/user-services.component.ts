@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
+import { ADestroyDirective } from '@shared/helpers/abstract-destroy';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { map, switchMap, take, takeUntil } from 'rxjs/operators';
 import { IService } from '../../model/interfaces';
@@ -12,7 +12,7 @@ import { NavigationService } from '../../services/navigation.service';
   templateUrl: './user-services.component.html',
   styleUrls: ['./user-services.component.sass']
 })
-export class ClientServicesComponent extends ADestroyHelper {
+export class ClientServicesComponent extends ADestroyDirective {
 
   clientId: string;
   userServices: IUserService[];

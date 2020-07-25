@@ -4,7 +4,7 @@ import { EBoxType } from '@clients/model/enums';
 import { IBox } from '@clients/model/interfaces';
 import { IUserService, IUserServiceFormValue, UserService } from '@clients/model/user.service';
 import { ClientService } from '@clients/services/client.service';
-import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
+import { ADestroyDirective } from '@shared/helpers/abstract-destroy';
 import { ConfirmService } from '@shared/services/confirm.service';
 import { catchError, filter, finalize, map, switchMap, take, tap } from 'rxjs/operators';
 
@@ -13,7 +13,7 @@ import { catchError, filter, finalize, map, switchMap, take, tap } from 'rxjs/op
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass']
 })
-export class UserServiceListComponent extends ADestroyHelper implements OnChanges {
+export class UserServiceListComponent extends ADestroyDirective implements OnChanges {
 
   @Input() userServices: IUserService[];
 

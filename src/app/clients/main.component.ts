@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { skip, takeUntil } from 'rxjs/operators';
-import { ADestroyHelper } from '../shared/helpers/abstract-destroy';
+import { ADestroyDirective } from '../shared/helpers/abstract-destroy';
 import { NavigationService } from './services/navigation.service';
 import { NavigationState } from './state/navigation.store';
 import { ENavigationState } from './state/state.enum';
@@ -11,7 +11,7 @@ import { ENavigationState } from './state/state.enum';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.sass']
 })
-export class MainComponent extends ADestroyHelper implements OnInit {
+export class MainComponent extends ADestroyDirective implements OnInit {
 
   constructor(
     private navigationService: NavigationService,

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
+import { ADestroyDirective } from '@shared/helpers/abstract-destroy';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, finalize, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { IUser } from '../../model/interfaces';
@@ -13,7 +13,7 @@ import { SettingsService } from '../../services/settings.service';
   templateUrl: './tree-navigation.component.html',
   styleUrls: ['./tree-navigation.component.sass']
 })
-export class TreeNavigationComponent extends ADestroyHelper implements OnInit, OnDestroy {
+export class TreeNavigationComponent extends ADestroyDirective implements OnInit, OnDestroy {
 
   users: Partial<IUser>[];
   statusInfo: string;

@@ -5,7 +5,7 @@ import { IService } from '@clients/model/interfaces';
 import { IUserService } from '@clients/model/user.service';
 import { ClientService } from '@clients/services/client.service';
 import { dateAdd, EDateValueType } from '@core/utils/date.utils';
-import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
+import { ADestroyDirective } from '@shared/helpers/abstract-destroy';
 import { filter, switchMap, take, takeUntil } from 'rxjs/operators';
 import {
   ABONEMENT_SERVICE_ID_CALCULATOR,
@@ -26,7 +26,7 @@ interface IPeriod {
   templateUrl: './create-service-wizard.component.html',
   styleUrls: ['./create-service-wizard.component.sass']
 })
-export class CreateServiceWizardComponent extends ADestroyHelper implements OnChanges {
+export class CreateServiceWizardComponent extends ADestroyDirective implements OnChanges {
 
   @Input() clientId: string;
   @Input() services: IService[];
