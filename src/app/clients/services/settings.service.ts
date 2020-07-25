@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { ServicesSettingsComponent } from '../components/settings/services-settings/services-settings.component';
 import { UserSettingsComponent } from '../components/settings/user-settings/user-settings.component';
 import { ESettings } from '../model/settings.enum';
 
@@ -56,8 +55,6 @@ export class SettingsService {
 
   private getComponentTypeByEnum(type: ESettings): ComponentType<unknown> {
     switch (type) {
-      case ESettings.SERVICES:
-        return ServicesSettingsComponent;
       case ESettings.USER_SETTINGS:
         return UserSettingsComponent;
       default:
@@ -67,8 +64,6 @@ export class SettingsService {
 
   private getTitleByEnum(v: ESettings) {
     switch (v) {
-      case ESettings.SERVICES:
-        return 'Services Settings';
       case ESettings.USER_SETTINGS:
         return 'Client Settings';
       default:

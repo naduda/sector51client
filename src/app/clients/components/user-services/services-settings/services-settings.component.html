@@ -1,0 +1,48 @@
+<form autocomplete="off"
+      novalidate
+      [formGroup]="form">
+
+  <mat-table formArrayName="rows" [dataSource]="services">
+
+    <ng-container matColumnDef="idx">
+      <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;">
+        {{idx + 1}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <input matInput formControlName="name" placeholder="Service Name">
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="desc">
+      <mat-header-cell *matHeaderCellDef> Desc </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <input matInput formControlName="desc" placeholder="Service Desc">
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Price, ₴ </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <input type="number" matInput formControlName="price" placeholder="Service Price">
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="save">
+      <mat-header-cell *matHeaderCellDef> Save </mat-header-cell>
+      <mat-cell *matCellDef="let idx = index;" [formGroupName]="idx">
+        <mat-icon color="primary"
+                  [class.disabled]="rowsControl.controls[idx].invalid"
+                  (click)="saveService(idx)">save</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</form>

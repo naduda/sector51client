@@ -6,7 +6,7 @@ import { IUserService, IUserServiceFormValue, UserService } from '@clients/model
 import { ClientService } from '@clients/services/client.service';
 import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
 import { ConfirmService } from '@shared/services/confirm.service';
-import { catchError, finalize, map, take, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, map, switchMap, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'sector-user-service-list',
@@ -72,21 +72,23 @@ export class UserServiceListComponent extends ADestroyHelper implements OnChange
       title: 'You are going to delete current item',
       message: 'Are you sure?',
     };
-    this.confirmService.confirm(confirm).subscribe(e => console.log(e));
-
-    return;
-
-    this.loading = true;
-    const us = row.value as IUserService;
-    this.clientService.deleteUserService(us)
+    this.confirmService.confirm(confirm)
       .pipe(
-        finalize(() => this.loading = false),
-        catchError((ex) => {
-          alert('Something went wrong...');
-          throw ex;
+        filter(Boolean),
+        switchMap(_ => {
+          this.loading = true;
+          const us = row.value as IUserService;
+          return this.clientService.deleteUserService(us)
+            .pipe(
+              finalize(() => this.loading = false),
+              catchError((ex) => {
+                alert('Something went wrong...');
+                throw ex;
+              }),
+            );
         })
       )
-      .subscribe(_ => this.onDelete.emit());
+      .subscribe(e => this.onDelete.emit());
   }
 
   private initBoxesIfNeeded() {

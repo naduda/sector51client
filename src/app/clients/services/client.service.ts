@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 import { IBox, IService, IUser } from '../model/interfaces';
 import { IUserService, IUserServiceFormValue } from '../model/user.service';
@@ -51,6 +51,9 @@ export class ClientService {
   }
 
   getUserServices(id: string): Observable<IUserService[]> {
+    if (!id) {
+      return of([]);
+    }
     const params = new HttpParams().set('id', id);
     return this.http.get<IUserService[]>('/private/user-services', { params });
   }
@@ -64,6 +67,10 @@ export class ClientService {
           this.clients$ = null;
         }),
       );
+  }
+
+  updateService(v: IService): Observable<void> {
+    return this.http.put<void>('/private/services', v);
   }
 
   updateUserService(v: IUserService): Observable<void> {

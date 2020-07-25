@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ADestroyHelper } from '@shared/helpers/abstract-destroy';
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { filter, map, switchMap, take, takeUntil } from 'rxjs/operators';
+import { map, switchMap, take, takeUntil } from 'rxjs/operators';
 import { IService } from '../../model/interfaces';
 import { IUserService } from '../../model/user.service';
 import { ClientService } from '../../services/client.service';
@@ -31,7 +31,6 @@ export class ClientServicesComponent extends ADestroyHelper {
         takeUntil(this.destroy$),
         switchMap(_ => navigationService.state$),
         map(e => e.clientId),
-        filter(e => !!e),
       )
       .subscribe(e => this.loadUserServices(e));
   }

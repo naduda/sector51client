@@ -1,4 +1,4 @@
-<div class="user-services" *ngIf="clientId">
+<div class="user-services" *ngIf="clientId; else servicesSettings">
   <sector-create-service-wizard [clientId]="clientId"
                                 [userServices]="userServices"
                                 [services]="services"
@@ -9,3 +9,13 @@
                             (onDelete)="reload()">
   </sector-user-service-list>
 </div>
+
+<ng-template #servicesSettings>
+  <div class="user-services">
+    <h2 class="text-center">Services</h2>
+
+    <main class="list">
+      <sector-services-settings-page [services]="services"></sector-services-settings-page>
+    </main>
+  </div>
+</ng-template>

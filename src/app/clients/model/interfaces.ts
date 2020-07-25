@@ -8,6 +8,7 @@ export interface IUser {
 export interface IService {
   id: number;
   name: string;
+  desc: string;
   price: number;
 }
 
