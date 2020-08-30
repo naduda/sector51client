@@ -45,7 +45,7 @@ export class UploadFileComponent extends AValueAccessor {
 
   private uploadFile(file: File): Observable<void> {
     const formData: FormData = new FormData();
-    formData.append(this.name, file, this.fileName);
+    formData.append(this.name, file, this.fileName || file.name);
     return this.http.post<void>(this.url, formData);
   }
 }

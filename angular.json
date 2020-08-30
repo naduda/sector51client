@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "sector51client"
+  "defaultProject": "sector51client",
+  "cli": {
+    "analytics": false
+  }
 }
